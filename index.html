@@ -26,7 +26,7 @@
     <div id="gameContainer"></div>
     <script type="text/javascript">
         window.onload = function () {
-            var game = new Phaser.Game(--, --, Phaser.AUTO, 'gameContainer'); // Declares size and game container
+            var game = new Phaser.Game(769, 400, Phaser.AUTO, 'gameContainer'); // Declares size and game container
             game.state.add('Boot', Jumpathlon.Boot); // Initiates Booter
             game.state.add('Preloader', Jumpathlon.Preloader); // Initiates Preloader
             game.state.add('Menu', Jumpathlon.Menu); // Initiates Start menu

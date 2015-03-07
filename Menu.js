@@ -1,6 +1,5 @@
 Jumpathlon.Menu = function (game) {
     this.startBG;
-    this.ding;
 }
 
 Jumpathlon.Menu.prototype = {

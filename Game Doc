@@ -1,0 +1,26 @@
+// Audio assets
+    
+    menuMusic
+    gameMusic
+
+// Image assets
+
+    menuBackground
+    playButtonImg
+    optionsButtonImg
+    backButtonImg
+    muteButtonImg
+    
+// Game logics
+    
+    scoreCount
+    player
+        movement
+    
+// Menu logics
+    
+    startGame
+    endGame
+    pauseGame
+    
+    
