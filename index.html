@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width">
     <link rel="icon" sizes="--" href="--">
-    <title>Jumpathlon</title>
+    <title>Aste-void</title>
     <script src="libs/phaser.js"></script>
     <script src="Boot.js"></script>
     <script src="Preloader.js"></script>
@@ -27,10 +27,10 @@
     <script type="text/javascript">
         window.onload = function () {
             var game = new Phaser.Game(769, 400, Phaser.AUTO, 'gameContainer'); // Declares size and game container
-            game.state.add('Boot', Jumpathlon.Boot); // Initiates Booter
-            game.state.add('Preloader', Jumpathlon.Preloader); // Initiates Preloader
-            game.state.add('Menu', Jumpathlon.Menu); // Initiates Start menu
-            game.state.add('Game', Jumpathlon.Game); // Initiates Game mode
+            game.state.add('Boot', Astevoid.Boot); // Initiates Booter
+            game.state.add('Preloader', Astevoid.Preloader); // Initiates Preloader
+            game.state.add('Menu', Astevoid.Menu); // Initiates Start menu
+            game.state.add('Game', Astevoid.Game); // Initiates Game mode
             game.state.start('Boot'); // Start Game!
         }
     </script>

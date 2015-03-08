@@ -1,19 +1,21 @@
-Jumpathlon.Game = function (game) {
+Astevoid.Game = function (game) {
     // Game variable declaration
+    this.gameOver;
 };
 
-Jumpathlon.Game.prototype = {
+Astevoid.Game.prototype = {
 
     create: function () {
 
-
+        this.gameOver = false;
         this.buildWorld();
-    },
+    }, // create function
 
 
     buildWorld: function () {
+        this.add.image(0, 0, 'gameBg');
 
-    },
+    }, // buildWorld
 
 
 
@@ -21,7 +23,7 @@ Jumpathlon.Game.prototype = {
 
     update: function () {
 
-    }
+        } // update
 
 
-};
+}; // Game prototype

@@ -1,0 +1,47 @@
+// Audio assets
+    
+    menuMusic
+    gameMusic
+    
+    onButtonClick
+    
+    onDeathEffect
+    
+// Image assets
+
+    menuBackground
+    gameBackground
+    
+    playButtonImg
+    exitButtonImg
+    resumeButtonImg
+    
+    optionsTooltip
+    musicOnTooltip
+    musicOffTooltip
+    
+    playerChar
+    asteroidsChar
+    
+// Game logics
+    
+    score Count
+    player movement
+    
+    player/environment collision
+    player/asteroids collision
+    
+    asteroids spawn
+    asteroid destruct
+    
+// Menu logics
+    
+    startGame
+    endGame
+    pauseGame
+    
+    musicOff
+    musicOn
+    
+    effectsOn
+    effectOff

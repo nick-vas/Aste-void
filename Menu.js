@@ -1,16 +1,22 @@
-Jumpathlon.Menu = function (game) {
-    this.startBG;
+Astevoid.Menu = function (game) {
+
+    this.startBg;
+    this.playBtn;
 }
 
-Jumpathlon.Menu.prototype = {
+Astevoid.Menu.prototype = {
 
-    create: function () {
+        create: function () {
 
-        startBG = this.add.image(0, 0, 'titlescreen'); // add background image
+            startBg = this.add.image(0, 0, 'menuBg'); // add background image
+            playBtn = this.add.image(this.world.centerX - 35, this.world.centerY - 30, 'playBtn');
+            playBtn.inputEnabled = true;
+            playBtn.events.onInputDown.addOnce(this.startGame, this);
 
-    },
+        }, // create function
 
-    startGame: function (pointer) {
-        this.state.start('Game'); // start the game!
-    }
-}
+        startGame: function (pointer) {
+
+                this.state.start('Game'); // start the game!
+            } // startGame
+    } // Menu prototype

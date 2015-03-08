@@ -1,8 +1,8 @@
-var Jumpathlon = {};
+var Astevoid = {};
 
-Jumpathlon.Boot = function (game) {};
+Astevoid.Boot = function (game) {};
 
-Jumpathlon.Boot.prototype = {
+Astevoid.Boot.prototype = {
     preload: function () {
 
     },
@@ -19,7 +19,6 @@ Jumpathlon.Boot.prototype = {
         this.scale.setScreenSize(true);
 
         this.input.addPointer();
-        this.stage.backgroundColor = '--';
 
         //preloader initiation
         this.state.start('Preloader');
