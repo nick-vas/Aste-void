@@ -17,6 +17,13 @@ Astevoid.Preloader.prototype = {
 
         this.load.image('musicTool_on', 'images/musicTooltip_on.png');
         this.load.image('musicTool_off', 'images/musicTooltip_off.png');
+        this.load.spritesheet('musicTool', 'images/musicTooltip.png', 52, 41);
+
+        this.load.image('characterImg', 'images/character_image.png');
+        this.load.image('asteroid1Img', 'images/asteroid1_image.png');
+        this.load.image('asteroid2Img', 'images/asteroid2_image.png');
+        this.load.image('asteroid3Img', 'images/asteroid3_image.png');
+        this.load.image('asteroid4Img', 'images/asteroid4_image.png');
 
 
     }, // preload

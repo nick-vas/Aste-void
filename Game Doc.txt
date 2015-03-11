@@ -6,22 +6,25 @@
     onButtonClick
     
     onDeathEffect
+    onChangeDirection
     
 // Image assets
 
-    menuBackground
-    gameBackground
+    font
     
-    playButtonImg
-    exitButtonImg
-    resumeButtonImg
+    menuBackground+
+    gameBackground+
     
-    optionsTooltip
+    playButtonImg+
+    exitButtonImg+
+    backButtonImg+
+    
     musicOnTooltip
     musicOffTooltip
     
-    playerChar
-    asteroidsChar
+    playerChar+
+    asteroidsChar+
+        1,2,3,4
     
 // Game logics
     
@@ -36,12 +39,11 @@
     
 // Menu logics
     
-    startGame
+    startGame+
     endGame
     pauseGame
     
     musicOff
     musicOn
     
-    effectsOn
-    effectOff
+    
