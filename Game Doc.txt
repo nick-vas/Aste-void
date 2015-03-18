@@ -46,4 +46,8 @@
     musicOff
     musicOn
     
+// Misc
+
+//console.log(this); good trick to check hash tables and references
+    
     

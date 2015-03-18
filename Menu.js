@@ -1,6 +1,5 @@
 Astevoid.Menu = function (game) {
 
-    this.startBg;
     this.playBtn;
     this.musicBtn;
 }
@@ -9,7 +8,7 @@ Astevoid.Menu.prototype = {
 
         create: function () {
 
-            startBg = this.add.image(0, 0, 'menuBg'); // add background image
+            this.add.image(0, 0, 'menuBg'); // add background image
 
             playBtn = this.add.button(this.world.centerX - 35, this.world.centerY - 30, 'playBtn', this.startGame, this);
 
@@ -20,6 +19,7 @@ Astevoid.Menu.prototype = {
         startGame: function (pointer) {
 
             this.state.start('Game'); // start the game!
+
         }, // startGame
 
         muteMusic: function () {
