@@ -1,0 +1,55 @@
+// Audio assets
+    
+    menuMusic
+    gameMusic
+    
+    onButtonClick
+    
+    onDeathEffect
+    
+// Image assets
+
+    font
+    
+    menuBackground+
+    gameBackground+
+    
+    playButtonImg+
+    exitButtonImg+
+    backButtonImg+
+    
+    musicOnTooltip+
+    musicOffTooltip+
+    
+    playerChar+
+    asteroidsChar+
+        1,2,3,4
+    
+    heartsLeft
+    
+// Game logics
+    
+    score Count
+    takeLife
+    giveLife
+    
+    player movement+
+    
+    player/environment collision
+    player/asteroids collision+
+    
+    asteroids spawn+
+    asteroid destruct+
+    
+// Menu logics
+    
+    startGame+
+    endGame
+    pauseGame
+    
+    musicOff
+    musicOn
+    
+// Misc
+
+//console.log(this); good trick to check hash tables and references
