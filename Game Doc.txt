@@ -6,10 +6,6 @@
     onButtonClick
     
     onDeathEffect
-<<<<<<< HEAD
-=======
-    onChangeDirection
->>>>>>> Aste-void/master
     
 // Image assets
 
@@ -22,19 +18,13 @@
     exitButtonImg+
     backButtonImg+
     
-<<<<<<< HEAD
     musicOnTooltip+
     musicOffTooltip+
-=======
-    musicOnTooltip
-    musicOffTooltip
->>>>>>> Aste-void/master
     
     playerChar+
     asteroidsChar+
         1,2,3,4
     
-<<<<<<< HEAD
     heartsLeft
     
 // Game logics
@@ -45,23 +35,10 @@
     
     player movement+
     
-    player/environment collision
     player/asteroids collision+
     
     asteroids spawn+
-    asteroid destruct+
-=======
-// Game logics
-    
-    score Count
-    player movement
-    
-    player/environment collision
-    player/asteroids collision
-    
-    asteroids spawn
-    asteroid destruct
->>>>>>> Aste-void/master
+    asteroid respawn+
     
 // Menu logics
     
@@ -73,11 +50,4 @@
     musicOn
     
 // Misc
-
-<<<<<<< HEAD
 //console.log(this); good trick to check hash tables and references
-=======
-//console.log(this); good trick to check hash tables and references
-    
-    
->>>>>>> Aste-void/master
