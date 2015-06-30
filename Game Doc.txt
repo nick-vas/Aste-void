@@ -25,7 +25,7 @@
     asteroidsChar+
         1,2,3,4
     
-    heartsLeft
+    hearts
     
 // Game logics
     

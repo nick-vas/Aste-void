@@ -1,33 +1,31 @@
-Astevoid.Game = function (game) {
-    // Game variable declaration
-    this.gameOver;
-    this.player;
-    this.asteroidsGroup;
-    this.totalAsteroids;
-    this.quitBtn;
-};
+Astevoid.Game = function (game) {};
 
 Astevoid.Game.prototype = {
-
     create: function () {
         this.game.renderer.clearBeforeRender = false;
         this.game.renderer.roundPixels = true;
         this.gameOver = false;
-        this.totalAsteroids = 10;
+        this.seconds = 0;
+        this.timer = this.time.create(false);
+        this.timer.loop(10, this.updateTime, this);
+        this.totalAsteroids = 20;
         this.physics.startSystem(Phaser.Physics.ARCADE);
-
         this.buildWorld();
 
     }, // create function
 
-
     buildWorld: function () {
-
         this.add.image(0, 0, 'gameBg');
         this.buildPlayer();
         this.buildAsteroids();
-
+        var score = this.add.bitmapText(10, 5, 'font', ' ', 35);
+        this.score = score;
+        this.timer.start();
     }, // buildWorld
+
+    updateTime: function () {
+        this.seconds++;
+    },
 
     buildPlayer: function () {
 
@@ -45,14 +43,15 @@ Astevoid.Game.prototype = {
     buildAsteroids: function () {
         this.asteroidsGroup = this.add.group();
         for (var i = 0; i < this.totalAsteroids; i++) {
-            var ast = this.asteroidsGroup.create(this.rnd.integerInRange(769, 2000), this.rnd.realInRange(0, this.world.height), 'asteroid');
+            var ast = this.asteroidsGroup.create(this.rnd.integerInRange(800, 3000), this.rnd.realInRange(0, this.world.height), 'asteroid');
             var scale = this.rnd.realInRange(0.3, 0.7);
             ast.anchor.setTo(0.5, 0.5);
             ast.scale.x = scale;
             ast.scale.y = scale;
             this.physics.enable(ast, Phaser.Physics.ARCADE);
             ast.enableBody = true;
-            ast.body.velocity.x = this.rnd.integerInRange(-150, -400);
+            ast.body.velocity.x = this.rnd.integerInRange(-100, -400);
+            ast.body.angularVelocity = this.rnd.integerInRange(-300, 300);
             ast.checkWorldBounds = true;
             ast.events.onOutOfBounds.add(this.resetAsteroid, this);
         }
@@ -68,8 +67,12 @@ Astevoid.Game.prototype = {
 
     respawnAsteroid: function (ast) {
         if (this.gameOver == false) {
-            ast.reset(this.rnd.integerInRange(769, 2000), this.rnd.realInRange(15, this.world.height - 70));
-            ast.body.velocity.x = this.rnd.integerInRange(-150, -400);
+            ast.reset(this.rnd.integerInRange(800, 3000), this.rnd.realInRange(0, this.world.height));
+            ast.body.velocity.x = this.rnd.integerInRange(-100, -400);
+            ast.body.angularVelocity = this.rnd.integerInRange(-300, 300);
+            var scale = this.rnd.realInRange(0.3, 0.7);
+            ast.scale.x = scale;
+            ast.scale.y = scale;
         }
     }, // respawnAsteroid
 
@@ -86,7 +89,15 @@ Astevoid.Game.prototype = {
 
     endGame: function () {
 
-        this.quitBtn = this.add.button(this.world.centerX - 35, this.world.centerY - 30, 'exitBtn', this.quitGame, this);
+        this.timer.stop();
+        this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+        exitBtn = this.add.bitmapText(this.world.centerX - 35, this.world.centerY - 30, 'font', 'Exit', 60);
+        exitBtn.align = 'center';
+        exitBtn.x = this.game.width / 2 - exitBtn.textWidth / 2;
+        exitBtn.inputEnabled = true;
+        var endKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        endKey.onDown.add(this.quitGame, this);
+        exitBtn.events.onInputDown.addOnce(this.quitGame, this);
 
     }, // endGame
 
@@ -98,34 +109,35 @@ Astevoid.Game.prototype = {
 
     update: function () {
 
-            this.player.body.velocity.x = 10;
-            this.player.body.velocity.y = 0;
-            this.player.body.angularVelocity = 0;
-            this.physics.arcade.overlap(this.player, this.asteroidsGroup, this.playerCollision, null, this);
+        this.score.setText(this.seconds);
 
-            if (this.player.x < 0) {
-                this.player.x = this.game.width;
-            } else if (this.player.x > this.game.width) {
-                this.player.x = 0;
-            }
+        this.player.body.velocity.x = 10;
+        this.player.body.velocity.y = 0;
+        this.player.body.angularVelocity = 0;
+        this.physics.arcade.overlap(this.player, this.asteroidsGroup, this.playerCollision, null, this);
 
-            if (this.player.y < 0) {
-                this.player.y = this.game.height;
-            } else if (this.player.y > this.game.height) {
-                this.player.y = 0;
-            }
+        // screen wrap logic
+        if (this.player.x < 0) {
+            this.player.x = this.game.width;
+        } else if (this.player.x > this.game.width) {
+            this.player.x = 0;
+        }
+        if (this.player.y < 0) {
+            this.player.y = this.game.height;
+        } else if (this.player.y > this.game.height) {
+            this.player.y = 0;
+        } // wrap end
 
+        // movement
+        if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+            this.player.body.angularVelocity = -400;
+        } else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            this.player.body.angularVelocity = 400;
+        }
+        if (this.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+            this.physics.arcade.velocityFromAngle(this.player.angle, 350, this.player.body.velocity);
+        } //movements end
 
-            if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-                this.player.body.angularVelocity = -400;
-            } else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-                this.player.body.angularVelocity = 400;
-            }
-
-            if (this.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-                this.physics.arcade.velocityFromAngle(this.player.angle, 300, this.player.body.velocity);
-            }
-
-        } // update
+    }, // update
 
 }; // Game prototype

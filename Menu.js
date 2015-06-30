@@ -1,33 +1,37 @@
-Astevoid.Menu = function (game) {
-
-    this.playBtn;
-    this.musicBtn;
-}
+Astevoid.Menu = function (game) {}
 
 Astevoid.Menu.prototype = {
 
-        create: function () {
+    create: function () {
+        this.game.renderer.clearBeforeRender = false;
+        this.game.renderer.roundPixels = true;
+        this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+        this.add.image(0, 0, 'menuBg'); // add background image
 
-            this.add.image(0, 0, 'menuBg'); // add background image
+        playBtn = this.add.bitmapText(this.world.centerX, this.world.centerY - 30, 'font', 'Spacebar to play', 48);
+        playBtn.align = 'center';
+        playBtn.x = this.game.width / 2 - playBtn.textWidth / 2;
+        playBtn.inputEnabled = true;
+        var startKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        startKey.onDown.add(this.startGame, this);
+        playBtn.events.onInputDown.addOnce(this.startGame, this);
 
-            playBtn = this.add.button(this.world.centerX - 35, this.world.centerY - 30, 'playBtn', this.startGame, this);
+        musicBtn = this.add.button(48, 310, 'musicTool', this.muteMusic, this);
+        musicBtn.frame = 0;
+    }, // create function
 
-            musicBtn = this.add.button(48, 310, 'musicTool', this.muteMusic, this);
+    startGame: function (pointer) {
+
+        this.state.start('Game'); // start the game!
+
+    }, // startGame
+
+    muteMusic: function () {
+        if (musicBtn.frame == 0) {
+            musicBtn.frame = 1;
+        } else {
             musicBtn.frame = 0;
-        }, // create function
-
-        startGame: function (pointer) {
-
-            this.state.start('Game'); // start the game!
-
-        }, // startGame
-
-        muteMusic: function () {
-            if (musicBtn.frame == 0) {
-                musicBtn.frame = 1;
-            } else {
-                musicBtn.frame = 0;
-            }
         }
+    },
 
-    } // Menu prototype
+}; // Menu prototype

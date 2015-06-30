@@ -8,6 +8,8 @@ Astevoid.Preloader.prototype = {
 
     preload: function () {
 
+        this.load.bitmapFont('font', 'images/font/font.png', 'images/font/font.fnt');
+
         this.load.image('menuBg', 'images/menu_background.png');
         this.load.image('gameBg', 'images/game_background.png');
 
@@ -15,8 +17,6 @@ Astevoid.Preloader.prototype = {
         this.load.image('backBtn', 'images/back_button.png');
         this.load.image('exitBtn', 'images/exit_button.png');
 
-        this.load.image('musicTool_on', 'images/musicTooltip_on.png');
-        this.load.image('musicTool_off', 'images/musicTooltip_off.png');
         this.load.spritesheet('musicTool', 'images/musicTooltip.png', 52, 41);
 
         this.load.image('characterImg', 'images/character_image.png');
