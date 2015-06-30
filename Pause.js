@@ -1,8 +1,4 @@
-Astevoid.Pause = function (game) {
-    this.exitBtn;
-    this.backBtn;
-    this.musicStateBtn;
-}
+Astevoid.Pause = function (game) {}
 
 Astevoid.Pause.prototype = {
 

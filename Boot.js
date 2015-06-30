@@ -1,4 +1,4 @@
-var Astevoid = {};
+var Astevoid = {}
 
 Astevoid.Boot = function (game) {};
 
