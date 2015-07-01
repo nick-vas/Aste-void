@@ -38,8 +38,8 @@
 // Game logics
     
     score Count+
-    takeLife
-    giveLife
+    takeLife+
+    giveLife+
     
     player movement+
     

@@ -23,6 +23,9 @@ Astevoid.Game.prototype = {
         var heart1 = this.add.image(740, 8, 'heart');
         var heart2 = this.add.image(715, 8, 'heart');
         var heart3 = this.add.image(690, 8, 'heart');
+        this.heart1 = heart1;
+        this.heart2 = heart2;
+        this.heart3 = heart3;
         this.score = score;
         this.timer.start();
     }, // buildWorld
@@ -77,12 +80,21 @@ Astevoid.Game.prototype = {
     }, // respawnAsteroid
 
     playerCollision: function (player, ast) {
-        this.lives--;
-        if (this.lives <= 0) {
+        if (this.lives == 3) {
+            this.lives--;
+            this.respawnAsteroid(ast);
+            this.heart3.visible = false;
+        } else if (this.lives == 2) {
+            this.lives--;
+            this.respawnAsteroid(ast);
+            this.heart2.visible = false;
+        } else {
             this.gameOver = true;
-            var alive = this.add.bitmapText(100, 55, 'font', this.lives, 35);
+            this.lives--;
+            this.heart1.visible = false;
             this.endGame();
         }
+
 
     }, // playerCollision
 
@@ -110,6 +122,17 @@ Astevoid.Game.prototype = {
     update: function () {
 
         this.score.setText(this.seconds);
+
+        if ((this.seconds % 1000) == 0) {
+
+            if (this.lives == 2) {
+                this.lives++;
+                this.heart3.visible = true;
+            } else if (this.lives == 1) {
+                this.lives++;
+                this.heart2.visible = true;
+            }
+        }
 
         this.player.body.velocity.x = 10;
         this.player.body.velocity.y = 0;
