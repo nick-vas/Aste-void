@@ -57,15 +57,10 @@ Astevoid.Game.prototype = {
             ast.body.velocity.x = this.rnd.integerInRange(-100, -400);
             ast.body.angularVelocity = this.rnd.integerInRange(-300, 300);
             ast.checkWorldBounds = true;
-            ast.events.onOutOfBounds.add(this.resetAsteroid, this);
+            ast.events.onOutOfBounds.add(this.respawnAsteroid, this);
         }
     }, // buildAsteroids
 
-    resetAsteroid: function (ast) {
-        if (ast.x < 0) {
-            this.respawnAsteroid(ast);
-        }
-    }, // resetAsteroid
 
 
     respawnAsteroid: function (ast) {
@@ -123,7 +118,7 @@ Astevoid.Game.prototype = {
 
         this.score.setText(this.seconds);
 
-        if ((this.seconds % 1000) == 0) {
+        if ((this.seconds % 5000) == 0) {
 
             if (this.lives == 2) {
                 this.lives++;
