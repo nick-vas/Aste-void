@@ -8,7 +8,7 @@ Astevoid.Game.prototype = {
         this.seconds = 0;
         this.timer = this.time.create(false);
         this.timer.loop(10, this.updateTime, this);
-        this.totalAsteroids = 20;
+        this.totalAsteroids = 19;
         this.lives = 3;
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.buildWorld();
@@ -40,6 +40,9 @@ Astevoid.Game.prototype = {
         player.anchor.setTo(0.5, 0.5);
         this.physics.enable(player, Phaser.Physics.ARCADE);
         player.enableBody = true;
+
+
+
         this.player = player;
 
     }, // buildPlayer
@@ -97,6 +100,13 @@ Astevoid.Game.prototype = {
     endGame: function () {
 
         this.timer.stop();
+        this.player.kill();
+        death = this.add.sprite(this.player.x, this.player.y, 'charDeath', 0);
+        death.angle = this.player.angle;
+        death.anchor.setTo(0.5, 0.5);
+        anim = death.animations.add('charDeath');
+        anim.play(24, false);
+
         this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
         exitBtn = this.add.bitmapText(this.world.centerX - 35, this.world.centerY - 30, 'font', 'Exit', 60);
         exitBtn.align = 'center';

@@ -14,6 +14,7 @@ Astevoid.Preloader.prototype = {
 
         this.load.image('characterImg', 'images/character_image.png');
         this.load.image('asteroid', 'images/asteroid.png');
+        this.load.spritesheet('charDeath', 'images/animations/characterDeath.png', 480, 270);
 
 
     }, // preload

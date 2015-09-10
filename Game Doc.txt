@@ -31,7 +31,7 @@
     
     intro
     
-    onDeath
+    onDeath+
     onHit
     onMove
 
@@ -52,7 +52,6 @@
     
     startGame+
     endGame+
-    pauseGame
     
     musicOff
     musicOn
