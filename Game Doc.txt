@@ -1,11 +1,14 @@
 // Audio assets
     
-    menuMusic
-    gameMusic
+    menuMusic+
+    gameMusic+
     
-    onButtonClick
+    onMenuSelection
     
-    onDeathEffect
+    onDeathEffect+
+    
+    onHit1+
+    onHit2+
     
 // Image assets
 
@@ -22,6 +25,8 @@
     musicOffTooltip+
     
     playerChar+
+    afterburner
+    
     asteroidsChar+
         1,2,3,4
     
@@ -32,8 +37,7 @@
     intro
     
     onDeath+
-    onHit
-    onMove
+    onHit-
 
 // Game logics
     
@@ -53,12 +57,12 @@
     startGame+
     endGame+
     
-    musicOff
-    musicOn
+    musicOn/Off
     
 // Misc
     
     optimization
+    kongregate API
     
 // console.log(this); good trick to check hash tables and references
 // debug information: this.game.debug.bodyInfo(item_we_wanna_check, x, y);

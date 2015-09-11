@@ -7,6 +7,8 @@ Astevoid.Menu.prototype = {
         this.game.renderer.roundPixels = true;
         this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
         this.add.image(0, 0, 'menuBg'); // add background image
+        this.music = this.add.audio('menuMusic');
+        this.music.play('', 0, 0.3, true);
 
         playBtn = this.add.bitmapText(this.world.centerX, this.world.centerY - 30, 'font', 'Spacebar to play', 48);
         playBtn.align = 'center';
@@ -21,7 +23,7 @@ Astevoid.Menu.prototype = {
     }, // create function
 
     startGame: function (pointer) {
-
+        this.music.destroy();
         this.state.start('Game'); // start the game!
 
     }, // startGame

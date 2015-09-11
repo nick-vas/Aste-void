@@ -16,6 +16,13 @@ Astevoid.Preloader.prototype = {
         this.load.image('asteroid', 'images/asteroid.png');
         this.load.spritesheet('charDeath', 'images/animations/characterDeath.png', 480, 270);
 
+        this.load.audio('menuMusic', 'music/menu_music.wav');
+        this.load.audio('onDeath', 'music/onDeath.wav');
+        this.load.audio('onHit1', 'music/onHit1.wav');
+        this.load.audio('onHit2', 'music/onHit2.wav');
+        this.load.audio('onSelect', 'music/onSelect.wav');
+        this.load.audio('powerUp', 'music/powerUp.wav');
+        this.load.audio('gameMusic', 'music/gameMusic.wav');
 
     }, // preload
 

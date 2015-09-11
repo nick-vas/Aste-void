@@ -11,6 +11,13 @@ Astevoid.Game.prototype = {
         this.totalAsteroids = 19;
         this.lives = 3;
         this.physics.startSystem(Phaser.Physics.ARCADE);
+        this.music = this.add.audio('gameMusic');
+        this.music.play('', 0, 0.3, true);
+        this.hit1 = this.add.audio('onHit1');
+        this.hit2 = this.add.audio('onHit2');
+        this.death = this.add.audio('onDeath');
+        this.powerUp = this.add.audio('powerUp');
+        this.selection = this.add.audio('onSelect');
         this.buildWorld();
 
     }, // create function
@@ -80,10 +87,12 @@ Astevoid.Game.prototype = {
     playerCollision: function (player, ast) {
         if (this.lives == 3) {
             this.lives--;
+            this.hit1.play();
             this.respawnAsteroid(ast);
             this.heart3.visible = false;
         } else if (this.lives == 2) {
             this.lives--;
+            this.hit2.play();
             this.respawnAsteroid(ast);
             this.heart2.visible = false;
         } else {
@@ -101,9 +110,11 @@ Astevoid.Game.prototype = {
 
         this.timer.stop();
         this.player.kill();
+        this.music.destroy();
         death = this.add.sprite(this.player.x, this.player.y, 'charDeath', 0);
         death.angle = this.player.angle;
         death.anchor.setTo(0.5, 0.5);
+        this.death.play();
         anim = death.animations.add('charDeath');
         anim.play(24, false);
 
@@ -119,7 +130,7 @@ Astevoid.Game.prototype = {
     }, // endGame
 
     quitGame: function (pointer) {
-
+        this.selection.play();
         this.state.start('Menu');
 
     }, // quitGame
@@ -132,14 +143,16 @@ Astevoid.Game.prototype = {
 
             if (this.lives == 2) {
                 this.lives++;
+                this.powerUp.play();
                 this.heart3.visible = true;
             } else if (this.lives == 1) {
                 this.lives++;
+                this.powerUp.play();
                 this.heart2.visible = true;
             }
         }
 
-        this.player.body.velocity.x = 10;
+        this.player.body.velocity.x = 40;
         this.player.body.velocity.y = 0;
         this.player.body.angularVelocity = 0;
         this.physics.arcade.overlap(this.player, this.asteroidsGroup, this.playerCollision, null, this);
