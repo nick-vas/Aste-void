@@ -8,24 +8,24 @@ Astevoid.Game.prototype = {
         this.seconds = 0;
         this.timer = this.time.create(false);
         this.timer.loop(10, this.updateTime, this);
-        this.totalAsteroids = 19;
+        this.totalAsteroids = 18;
         this.lives = 3;
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.music = this.add.audio('gameMusic');
         this.music.play('', 0, 0.3, true);
         this.hit1 = this.add.audio('onHit1');
         this.hit2 = this.add.audio('onHit2');
-        this.death = this.add.audio('onDeath');
+        this.onDeath = this.add.audio('onDeath');
         this.powerUp = this.add.audio('powerUp');
         this.selection = this.add.audio('onSelect');
         this.buildWorld();
-
     }, // create function
 
     buildWorld: function () {
         this.add.image(0, 0, 'gameBg');
-        this.buildPlayer();
+        this.asteroidsGroup = this.add.group();
         this.buildAsteroids();
+        this.buildPlayer();
         var score = this.add.bitmapText(10, 5, 'font', ' ', 35);
         var heart1 = this.add.image(740, 8, 'heart');
         var heart2 = this.add.image(715, 8, 'heart');
@@ -47,15 +47,11 @@ Astevoid.Game.prototype = {
         player.anchor.setTo(0.5, 0.5);
         this.physics.enable(player, Phaser.Physics.ARCADE);
         player.enableBody = true;
-
-
-
         this.player = player;
 
     }, // buildPlayer
 
     buildAsteroids: function () {
-        this.asteroidsGroup = this.add.group();
         for (var i = 0; i < this.totalAsteroids; i++) {
             var ast = this.asteroidsGroup.create(this.rnd.integerInRange(800, 3000), this.rnd.realInRange(0, this.world.height), 'asteroid');
             var scale = this.rnd.realInRange(0.3, 0.7);
@@ -70,8 +66,6 @@ Astevoid.Game.prototype = {
             ast.events.onOutOfBounds.add(this.respawnAsteroid, this);
         }
     }, // buildAsteroids
-
-
 
     respawnAsteroid: function (ast) {
         if (this.gameOver == false) {
@@ -101,10 +95,7 @@ Astevoid.Game.prototype = {
             this.heart1.visible = false;
             this.endGame();
         }
-
-
     }, // playerCollision
-
 
     endGame: function () {
 
@@ -114,26 +105,30 @@ Astevoid.Game.prototype = {
         death = this.add.sprite(this.player.x, this.player.y, 'charDeath', 0);
         death.angle = this.player.angle;
         death.anchor.setTo(0.5, 0.5);
-        this.death.play();
+        this.onDeath.play();
         anim = death.animations.add('charDeath');
         anim.play(24, false);
+        this.quitGame();
+
+    }, // endGame
+
+    quitGame: function () {
 
         this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
         exitBtn = this.add.bitmapText(this.world.centerX - 35, this.world.centerY - 30, 'font', 'Exit', 60);
         exitBtn.align = 'center';
-        exitBtn.x = this.game.width / 2 - exitBtn.textWidth / 2;
+        exitBtn.x = this.game.width * 0.5 - exitBtn.textWidth * 0.5;
         exitBtn.inputEnabled = true;
         var endKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        endKey.onDown.add(this.quitGame, this);
-        exitBtn.events.onInputDown.addOnce(this.quitGame, this);
-
-    }, // endGame
-
-    quitGame: function (pointer) {
-        this.selection.play();
-        this.state.start('Menu');
+        endKey.onDown.add(this.quit, this);
+        exitBtn.events.onInputDown.addOnce(this.quit, this);
 
     }, // quitGame
+
+    quit: function (pointer) {
+        this.selection.play();
+        this.state.start('Menu');
+    },
 
     update: function () {
 
@@ -152,7 +147,7 @@ Astevoid.Game.prototype = {
             }
         }
 
-        this.player.body.velocity.x = 40;
+        this.player.body.velocity.x = 20;
         this.player.body.velocity.y = 0;
         this.player.body.angularVelocity = 0;
         this.physics.arcade.overlap(this.player, this.asteroidsGroup, this.playerCollision, null, this);
@@ -178,7 +173,6 @@ Astevoid.Game.prototype = {
         if (this.input.keyboard.isDown(Phaser.Keyboard.UP)) {
             this.physics.arcade.velocityFromAngle(this.player.angle, 350, this.player.body.velocity);
         }
-
     }, // update
 
 }; // Game prototype

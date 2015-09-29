@@ -2,10 +2,10 @@
     
     menuMusic+
     gameMusic+
-    
-    onMenuSelection
+    onSelection+
     
     onDeathEffect+
+    lifeUp+
     
     onHit1+
     onHit2+
@@ -19,16 +19,13 @@
     
     playButtonImg+
     exitButtonImg+
-    backButtonImg+
     
     musicOnTooltip+
     musicOffTooltip+
     
     playerChar+
-    afterburner
     
     asteroidsChar+
-        1,2,3,4
     
     hearts+
 
@@ -37,7 +34,6 @@
     intro
     
     onDeath+
-    onHit-
 
 // Game logics
     
@@ -51,6 +47,7 @@
     
     asteroids spawn+
     asteroid respawn+
+    playerDeath+
     
 // Menu logics
     
@@ -61,8 +58,11 @@
     
 // Misc
     
-    optimization
+    optimization+
     kongregate API
-    
+
+
+// this.game.debug.text(this.game.time.fps || '--', 600, 14, "#00ff00"); // shows fps
+// this.game.time.advancedTiming = true // fps requirement    
 // console.log(this); good trick to check hash tables and references
 // debug information: this.game.debug.bodyInfo(item_we_wanna_check, x, y);

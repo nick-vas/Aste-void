@@ -7,14 +7,14 @@ Astevoid.Preloader.prototype = {
         this.load.bitmapFont('font', 'images/font/font.png', 'images/font/font.fnt');
 
         this.load.image('menuBg', 'images/menu_background.png');
-        this.load.image('gameBg', 'images/game_background.png');
+        this.load.image('gameBg', 'images/game_background_comp.png');
 
         this.load.spritesheet('musicTool', 'images/musicTooltip.png', 52, 41);
-        this.load.image('heart', 'images/heart_image.png');
+        this.load.image('heart', 'images/heart_image_comp.png');
 
-        this.load.image('characterImg', 'images/character_image.png');
-        this.load.image('asteroid', 'images/asteroid.png');
-        this.load.spritesheet('charDeath', 'images/animations/characterDeath.png', 480, 270);
+        this.load.image('characterImg', 'images/character_image_comp.png');
+        this.load.image('asteroid', 'images/asteroid_comp.png');
+        this.load.spritesheet('charDeath', 'images/animations/characterDeath_comp.png', 480, 270);
 
         this.load.audio('menuMusic', 'music/menu_music.wav');
         this.load.audio('onDeath', 'music/onDeath.wav');
