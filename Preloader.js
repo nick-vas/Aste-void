@@ -6,10 +6,11 @@ Astevoid.Preloader.prototype = {
 
         this.load.bitmapFont('font', 'images/font/font.png', 'images/font/font.fnt');
 
-        this.load.image('menuBg', 'images/menu_background.png');
+        this.load.image('logo', 'images/logo.png');
+        this.load.image('menuBg', 'images/menu_background_comp.png');
         this.load.image('gameBg', 'images/game_background_comp.png');
 
-        this.load.spritesheet('musicTool', 'images/musicTooltip.png', 52, 41);
+        this.load.spritesheet('musicTool', 'images/musicTooltip_comp.png', 52, 41);
         this.load.image('heart', 'images/heart_image_comp.png');
 
         this.load.image('characterImg', 'images/character_image_comp.png');
@@ -28,7 +29,7 @@ Astevoid.Preloader.prototype = {
 
     update: function () {
 
-            this.state.start('Menu'); // preloads menu
+            this.state.start('Intro'); // preloads intro
 
         } // update
 }; // Preloader.prototype

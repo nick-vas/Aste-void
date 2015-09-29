@@ -13,6 +13,8 @@
     <script src="Preloader.js"></script>
     <script src="Menu.js"></script>
     <script src="Game.js"></script>
+    <script src="Intro.js"></script>
+    <script src="libs/store.min.js"></script>
     <style>
         body {
             padding: 0;
@@ -31,7 +33,8 @@
             game.state.add('Preloader', Astevoid.Preloader); // Initiates Preloader
             game.state.add('Menu', Astevoid.Menu); // Initiates Start menu
             game.state.add('Game', Astevoid.Game); // Initiates Game mode
-            game.state.start('Boot'); // Start Game!
+            game.state.add('Intro', Astevoid.Intro); // Initiates Intro mode
+            game.state.start('Boot'); // Starts Boot
         }
     </script>
 </body>

@@ -115,7 +115,7 @@ Astevoid.Game.prototype = {
     quitGame: function () {
 
         this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
-        exitBtn = this.add.bitmapText(this.world.centerX - 35, this.world.centerY - 30, 'font', 'Exit', 60);
+        exitBtn = this.add.bitmapText(this.world.centerX - 35, this.world.centerY - 30, 'font', 'Spacebar to Exit', 48);
         exitBtn.align = 'center';
         exitBtn.x = this.game.width * 0.5 - exitBtn.textWidth * 0.5;
         exitBtn.inputEnabled = true;
@@ -126,8 +126,25 @@ Astevoid.Game.prototype = {
     }, // quitGame
 
     quit: function (pointer) {
+        this.check = store.get('hiScore');
+        if (this.check < this.seconds) {
+            store.set('hiScore', this.seconds);
+        }
+        this.timer.destroy();
+        this.player.destroy();
+        this.asteroidsGroup.destroy();
+        this.heart1.destroy();
+        this.heart2.destroy();
+        this.heart3.destroy();
+        this.onDeath.destroy();
+        this.powerUp.destroy();
+        this.hit1.destroy();
+        this.hit2.destroy();
+
         this.selection.play();
         this.state.start('Menu');
+        this.endBtn.destroy();
+        this.score.destroy();
     },
 
     update: function () {
