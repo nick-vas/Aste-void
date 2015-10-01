@@ -10,6 +10,8 @@
     onHit1+
     onHit2+
     
+    intro music+
+    
 // Image assets
 
     font+
@@ -29,7 +31,7 @@
     
     hearts+
     
-    AdInfinum Lettering
+    AdInfinum Lettering+
 
 // Animations
     
@@ -61,9 +63,10 @@
     
 // Misc
     
+    minify+
     optimization+
-    instructions
-    story
+    instructions+
+    story+
 
 // this.game.debug.text(this.game.time.fps || '--', 600, 14, "#00ff00"); // shows fps
 // this.game.time.advancedTiming = true // fps requirement    

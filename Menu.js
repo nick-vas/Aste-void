@@ -6,18 +6,17 @@ Astevoid.Menu.prototype = {
         this.game.renderer.clearBeforeRender = false;
         this.game.renderer.roundPixels = true;
         store.disabled = false;
-        this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
         this.add.image(0, 0, 'menuBg'); // add background image
         this.music = this.add.audio('menuMusic');
-        this.music.play('', 0, 0.3, true);
+        this.music.fadeIn(4000, true);
         this.selection = this.add.audio('onSelect');
 
-        this.topScore = this.add.bitmapText(this.world.centerX, this.world.centerY - 50, 'font', 'HiScore: 0000', 48);
+        this.topScore = this.add.bitmapText(this.game.width * 0.5, this.world.centerY - 50, 'font', '0000', 48);
         this.topScore.align = 'center';
-        this.topScore.x = this.game.width * 0.5 - this.topScore.textWidth * 0.5;
+        this.topScore.anchor.setTo(0.5, 0.5);
         this.hiScore = store.get('hiScore');
-        if (this.hiScore != null) {
-            this.topScore.setText('HiScore: ' + this.hiScore);
+        if (this.hiScore > 0) {
+            this.topScore.setText(this.hiScore);
         }
 
         this.playBtn = this.add.bitmapText(this.world.centerX, this.world.centerY + 20, 'font', 'Spacebar to play', 48);
@@ -39,7 +38,10 @@ Astevoid.Menu.prototype = {
 
         this.selection.play();
         this.music.destroy();
-        this.state.start('Game'); // start the game!
+        if (first == 0) {
+            this.state.start('Instr');
+        } else this.state.start('Game'); // start the game!
+
 
     }, // startGame
 

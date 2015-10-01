@@ -1,6 +1,8 @@
 Astevoid.Game = function (game) {}
 
 Astevoid.Game.prototype = {
+
+
     create: function () {
         this.game.renderer.clearBeforeRender = false;
         this.game.renderer.roundPixels = true;
@@ -47,6 +49,10 @@ Astevoid.Game.prototype = {
         player.anchor.setTo(0.5, 0.5);
         this.physics.enable(player, Phaser.Physics.ARCADE);
         player.enableBody = true;
+        dummy = this.add.sprite(0, 0, 'charDeath', 0);
+        dummy.anchor.setTo(0.5, 0.5);
+        anim = dummy.animations.add('charDeath');
+        dummy.visible = false;
         this.player = player;
 
     }, // buildPlayer
@@ -90,29 +96,23 @@ Astevoid.Game.prototype = {
             this.respawnAsteroid(ast);
             this.heart2.visible = false;
         } else {
-            this.gameOver = true;
+            this.timer.stop();
+            dummy.angle = this.player.angle;
+            dummy.y = this.player.y;
+            dummy.x = this.player.x;
+            this.player.kill();
+            dummy.visible = true;
+            anim.play(24, false);
+            this.onDeath.play();
             this.lives--;
             this.heart1.visible = false;
+            this.music.destroy();
+            this.gameOver = true;
             this.endGame();
         }
     }, // playerCollision
 
     endGame: function () {
-
-        this.timer.stop();
-        this.player.kill();
-        this.music.destroy();
-        death = this.add.sprite(this.player.x, this.player.y, 'charDeath', 0);
-        death.angle = this.player.angle;
-        death.anchor.setTo(0.5, 0.5);
-        this.onDeath.play();
-        anim = death.animations.add('charDeath');
-        anim.play(24, false);
-        this.quitGame();
-
-    }, // endGame
-
-    quitGame: function () {
 
         this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
         exitBtn = this.add.bitmapText(this.world.centerX - 35, this.world.centerY - 30, 'font', 'Spacebar to Exit', 48);
@@ -120,18 +120,19 @@ Astevoid.Game.prototype = {
         exitBtn.x = this.game.width * 0.5 - exitBtn.textWidth * 0.5;
         exitBtn.inputEnabled = true;
         var endKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        endKey.onDown.add(this.quit, this);
-        exitBtn.events.onInputDown.addOnce(this.quit, this);
+        endKey.onDown.add(this.quitGame, this);
+        exitBtn.events.onInputDown.addOnce(this.quitGame, this);
 
-    }, // quitGame
+    }, // endGame
 
-    quit: function (pointer) {
+    quitGame: function (pointer) {
         this.check = store.get('hiScore');
         if (this.check < this.seconds) {
             store.set('hiScore', this.seconds);
         }
         this.timer.destroy();
         this.player.destroy();
+        dummy.destroy();
         this.asteroidsGroup.destroy();
         this.heart1.destroy();
         this.heart2.destroy();
@@ -145,13 +146,13 @@ Astevoid.Game.prototype = {
         this.state.start('Menu');
         this.endBtn.destroy();
         this.score.destroy();
-    },
+
+    }, // quitGame
 
     update: function () {
-
         this.score.setText(this.seconds);
 
-        if ((this.seconds % 5000) == 0) {
+        if ((this.seconds % 3000) == 0) {
 
             if (this.lives == 2) {
                 this.lives++;
@@ -163,8 +164,7 @@ Astevoid.Game.prototype = {
                 this.heart2.visible = true;
             }
         }
-
-        this.player.body.velocity.x = 20;
+        this.player.body.velocity.x = 10;
         this.player.body.velocity.y = 0;
         this.player.body.angularVelocity = 0;
         this.physics.arcade.overlap(this.player, this.asteroidsGroup, this.playerCollision, null, this);
@@ -183,12 +183,12 @@ Astevoid.Game.prototype = {
 
         // movement
         if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            this.player.body.angularVelocity = -400;
+            this.player.body.angularVelocity = -500;
         } else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            this.player.body.angularVelocity = 400;
+            this.player.body.angularVelocity = 500;
         }
         if (this.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-            this.physics.arcade.velocityFromAngle(this.player.angle, 350, this.player.body.velocity);
+            this.physics.arcade.velocityFromAngle(this.player.angle, 365, this.player.body.velocity);
         }
     }, // update
 

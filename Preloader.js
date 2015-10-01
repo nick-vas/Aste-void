@@ -6,7 +6,8 @@ Astevoid.Preloader.prototype = {
 
         this.load.bitmapFont('font', 'images/font/font.png', 'images/font/font.fnt');
 
-        this.load.image('logo', 'images/logo.png');
+        this.load.image('logo', 'images/logo_comp.png');
+        this.load.image('logoType', 'images/logo_type_comp.png');
         this.load.image('menuBg', 'images/menu_background_comp.png');
         this.load.image('gameBg', 'images/game_background_comp.png');
 
@@ -24,6 +25,12 @@ Astevoid.Preloader.prototype = {
         this.load.audio('onSelect', 'music/onSelect.wav');
         this.load.audio('powerUp', 'music/powerUp.wav');
         this.load.audio('gameMusic', 'music/gameMusic.wav');
+        this.load.audio('introSound', 'music/intro_aurrr.wav');
+        this.check = store.get('hiScore');
+        first = 0;
+        if (this.check == null) {
+            store.set('hiScore', 0);
+        }
 
     }, // preload
 
