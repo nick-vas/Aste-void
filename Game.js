@@ -20,6 +20,10 @@ Astevoid.Game.prototype = {
         this.onDeath = this.add.audio('onDeath');
         this.powerUp = this.add.audio('powerUp');
         this.selection = this.add.audio('onSelect');
+        this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.UP]);
+        this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.LEFT]);
+        this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.RIGHT]);
+        this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.DOWN]);
         this.buildWorld();
     }, // create function
 
